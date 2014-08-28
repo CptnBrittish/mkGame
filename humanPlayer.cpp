@@ -2,7 +2,7 @@
 #include "board.h"
 
 humanPlayer::humanPlayer(int playerNum){
-    humanPlayer::player = playerNum;
+    player = playerNum;
 }
 
 void humanPlayer::input(Board &playerBoard){
