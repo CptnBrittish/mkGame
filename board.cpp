@@ -112,11 +112,29 @@ int Board::checkIfGameWon(int playerNum){
 	}
     }
 
+    //check if game won diagonally
+    //we need to do this in the fowards and back direction
+    for(int row = 0; row < K; row++){
+	for(int col = 0; col < M; col++){
+	    //Only check this once as it applies to both directions
+	    if(boardState[col][row] == playerNum){
+		if(boardState[col+1][row+1] == playerNum){
+		    if(boardState[col+2][row+2] == playerNum){
+			return 1;
+		    }
+		}
+		if(boardState[col-1][row+1] == playerNum){
+		    if(boardState[col-2][row+2] == playerNum){
+			return 1;
+		    }
+		}
+	    }
+	}
+    }
     
     numInRow = 0;
 
     //Is the game a tie? 
-    //Yes we are doing anougher for loop mess yes its inefficant if i have time ill work out how to clean this up
     int numCounted = 0;
     int boardSize = M*K;
     for(int col = 0; col < M; col++){
