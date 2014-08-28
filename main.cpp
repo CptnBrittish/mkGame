@@ -19,7 +19,7 @@ int main(){
     while(1){
 	player[0].input(board);
 	board.printBoard();
-	checkResult = board.checkIfGameWon();
+	checkResult = board.checkIfGameWon(1);
 	if(checkResult == 1){
 	    cout << "Player 1 won the game!" << endl;
 	    exit(0);
@@ -29,6 +29,7 @@ int main(){
 	}
 	player[1].input(board);
 	board.printBoard();
+	checkResult = board.checkIfGameWon(2);
 	if(checkResult == 1){
 	    cout << "Player 2 won the game!" << endl;
 	    exit(0);
@@ -40,5 +41,5 @@ int main(){
     //If we somehow managed to end up here the world is imploding and chaos theory had its last laugh
     //Like seriously we should not be here
     return -1000;
-    //wonder what number that becomes?
+   
 }

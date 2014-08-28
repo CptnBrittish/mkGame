@@ -20,7 +20,7 @@ private:
 public:
     void printBoard();
     int playerInput(int, int, int);
-    int checkIfGameWon();
+    int checkIfGameWon(int);
     Board();
 
 };

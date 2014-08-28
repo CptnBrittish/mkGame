@@ -80,13 +80,13 @@ int Board::playerInput(int col, int row, int player){
 //return 1 if game won
 //return 2 if a tie
 //return -1 if not won (somewhere is a method to the madness which is my seemingly arbitrary return values)
-int Board::checkIfGameWon(){
+int Board::checkIfGameWon(int playerNum){
     int numInRow = 0;
 
     //Check if a person has won the game vertically
     for(int col = 0; col < M; col++){
 	for(int row = 0; row < K; row++){
-	    if(boardState[col][row] == 1){
+	    if(boardState[col][row] == playerNum){
 		numInRow++;
 	    } else {
 		numInRow = 0;
@@ -97,24 +97,11 @@ int Board::checkIfGameWon(){
 	}
     }
     numInRow = 0;
-    for(int col = 0; col < M; col++){
-	for(int row = 0; row < K; row++){
-	    if(boardState[col][row] == 2){
-		numInRow++;
-	    } else {
-		numInRow = 0;
-	    }
-	    if(numInRow == 3){
-		return 1;
-	    }
-	}
-    }
-    numInRow = 0;
-	
+    	
     //check to see if a person has won the game horizontally
     for(int row = 0; row < K; row++){
 	for(int col = 0; col < M; col++){
-	    if(boardState[col][row] == 1){
+	    if(boardState[col][row] == playerNum){
 		numInRow++;
 	    } else {
 		numInRow = 0;
@@ -128,20 +115,6 @@ int Board::checkIfGameWon(){
     
     numInRow = 0;
 
-    for(int row = 0; row < K; row++){
-	for(int col = 0; col < M; col++){
-	    if(boardState[col][row] == 2){
-		numInRow++;
-	    } else {
-		numInRow = 0;
-	    }
-	    if(numInRow == 3){
-		return 1;
-	    }
-	}
-    }
-    numInRow = 0;	      
-
     //Is the game a tie? 
     //Yes we are doing anougher for loop mess yes its inefficant if i have time ill work out how to clean this up
     int numCounted = 0;
@@ -149,7 +122,7 @@ int Board::checkIfGameWon(){
     for(int col = 0; col < M; col++){
 
 	for(int row = 0; row < K; row++){
-	    if((boardState[col][row] == 1) || (boardState[col][row] == 2)){
+	    if(boardState[col][row] != 0){
 		numCounted++;
 	    }
 	}
