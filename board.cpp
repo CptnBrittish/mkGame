@@ -6,7 +6,7 @@
 Board::Board(){
     for(int col = 0; col<M; col++){
 	for(int row = 0; row<K; row++){
-	    Board::boardState[col][row] = 0;
+	    boardState[col][row] = 0;
 	}
     }
 }
@@ -27,11 +27,11 @@ void Board::printBoard(){
 
 	for(int col = 0; col<M; col++){
 
-	    if(Board::boardState[col][row] == 0){
+	    if(boardState[col][row] == 0){
 		std::cout << ' ';
-	    } else if(Board::boardState[col][row] == 1){
+	    } else if(boardState[col][row] == 1){
 		std::cout << 'X';
-	    } else if(Board::boardState[col][row] == 2){
+	    } else if(boardState[col][row] == 2){
 		std::cout << 'O';
 	    } //no need to test for other values we should not be haviing errors in this array
 
@@ -62,16 +62,16 @@ int Board::playerInput(int col, int row, int player){
     }
 
     //We need to know if position is already taken if it is throw an error
-    if((Board::boardState[col][row] == 1) || (Board::boardState[col][row] == 2)){
+    if((boardState[col][row] == 1) || (boardState[col][row] == 2)){
 	return -2;
     }
     //as player 1 is one and player 2 is -1 we can just check as player 1 auto evaluates to true and player 2 false
     //the player is entering positions from one not zero account for the offset    
     if(player == 1){
-	Board::boardState[col][row] = 1;
+	boardState[col][row] = 1;
 	
     } else {
-	Board::boardState[col][row] = 2;
+	boardState[col][row] = 2;
     }
 
     return 1;
