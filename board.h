@@ -15,7 +15,7 @@ private:
   -1 = player 2 (O)
    defaults to 0
 */
-    int boardState[M][K];
+    int boardState[M][M];
 
 public:
     void printBoard();

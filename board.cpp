@@ -5,7 +5,7 @@
 //We need to zero all the array as gcc wont do it for us easyiest to do it in the constructor
 Board::Board(){
     for(int col = 0; col<M; col++){
-	for(int row = 0; row<K; row++){
+	for(int row = 0; row<M; row++){
 	    boardState[col][row] = 0;
 	}
     }
@@ -22,7 +22,7 @@ void Board::printBoard(){
 
     //Fill in rest of the board
     //Add a number to the end of the board then add a space
-    for(int row = 0; row<K; row++){
+    for(int row = 0; row<M; row++){
 	std::cout << row+1 << " ";
 
 	for(int col = 0; col<M; col++){
@@ -43,7 +43,7 @@ void Board::printBoard(){
 	std::cout << std::endl << "  ";
 
 	// If we are before the last line add "|" delimiters between the numbers
-	if(row<(K-1)){
+	if(row<(M-1)){
 	    for(int col = 0; col < M; col++){
 		std::cout << "|   ";
 	    }
@@ -57,7 +57,7 @@ void Board::printBoard(){
 //Returns 1 on succes
 //We are assuming the inputs allign to our array not the users perception so we dont randomly break if we forget to decremnt the value
 int Board::playerInput(int col, int row, int player){
-    if(col > M || row > K){
+    if(col > M || row > M){
 	return -1;
     }
 
@@ -85,13 +85,13 @@ int Board::checkIfGameWon(int playerNum){
 
     //Check if a person has won the game vertically
     for(int col = 0; col < M; col++){
-	for(int row = 0; row < K; row++){
+	for(int row = 0; row < M; row++){
 	    if(boardState[col][row] == playerNum){
 		numInRow++;
 	    } else {
 		numInRow = 0;
 	    }
-	    if(numInRow == 3){
+	    if(numInRow == K){
 		return 1;
 	    }
 	}
@@ -99,14 +99,14 @@ int Board::checkIfGameWon(int playerNum){
     numInRow = 0;
     	
     //check to see if a person has won the game horizontally
-    for(int row = 0; row < K; row++){
+    for(int row = 0; row < M; row++){
 	for(int col = 0; col < M; col++){
 	    if(boardState[col][row] == playerNum){
 		numInRow++;
 	    } else {
 		numInRow = 0;
 	    }
-	    if(numInRow == 3){
+	    if(numInRow == K){
 		return 1;
 	    }
 	}
@@ -114,17 +114,33 @@ int Board::checkIfGameWon(int playerNum){
 
     //check if game won diagonally
     //we need to do this in the fowards and back direction
-    for(int row = 0; row < K; row++){
+    for(int row = 0; row < M; row++){
 	for(int col = 0; col < M; col++){
 	    //Only check this once as it applies to both directions
 	    if(boardState[col][row] == playerNum){
-		if(boardState[col+1][row+1] == playerNum){
-		    if(boardState[col+2][row+2] == playerNum){
+		if(boardState[col-1][row+1] == playerNum){
+		    if(boardState[col-2][row+2] == playerNum){
 			return 1;
 		    }
 		}
-		if(boardState[col-1][row+1] == playerNum){
-		    if(boardState[col-2][row+2] == playerNum){
+		numInRow++;
+		for(int i = 1, j = 1; i < K; i++, j++){
+		    if(boardState[col+i][row+j] == playerNum){
+			numInRow++;
+		    } else {
+			numInRow = 0;
+		    }
+		    if(numInRow == K){
+			return 1;
+		    }
+		}
+		for(int i = -1, j = 1; j < K; i--, j++){
+		    if(boardState[col-i][row+j] == playerNum){
+			numInRow++;
+		    } else {
+			numInRow = 0;
+		    }
+		    if(numInRow == K){
 			return 1;
 		    }
 		}
@@ -136,10 +152,10 @@ int Board::checkIfGameWon(int playerNum){
 
     //Is the game a tie? 
     int numCounted = 0;
-    int boardSize = M*K;
+    int boardSize = M*M;
     for(int col = 0; col < M; col++){
 
-	for(int row = 0; row < K; row++){
+	for(int row = 0; row < M; row++){
 	    if(boardState[col][row] != 0){
 		numCounted++;
 	    }
@@ -149,5 +165,5 @@ int Board::checkIfGameWon(int playerNum){
 	return 2;
     }
 	 
-    return -1;
+    return -1; 
 }
