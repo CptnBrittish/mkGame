@@ -62,9 +62,9 @@ int Board::playerInput(int col, int row, int player){
     }
 
     //We need to know if position is already taken if it is throw an error
-    if((boardState[col][row] == 1) || (boardState[col][row] == 2)){
-	return -2;
-    }
+    if(boardState[col][row] != 0){
+	    return -2;
+	}
     //as player 1 is one and player 2 is -1 we can just check as player 1 auto evaluates to true and player 2 false
     //the player is entering positions from one not zero account for the offset    
     if(player == 1){
