@@ -76,7 +76,8 @@ void Board::printBoard(){
 //Returns 1 on succes
 //We are assuming the inputs allign to our array not the users perception so we dont randomly break if we forget to decremnt the value
 int Board::playerInput(int col, int row, int player){
-    if(col > M || row > M){
+
+    if((col > M-1) || (row > M-1)){
 	return -1;
     }
 
