@@ -11,8 +11,14 @@ int main(){
     int boardSize, winLengh;
     cout << "Please enter M: ";
     cin >> boardSize;
+    
     cout << "Please enter K: ";
     cin >> winLengh;
+    while (winLengh > boardSize){
+	cout << "K needs to be as big or smaller then M" << endl
+	     << "Please enter K: ";
+	cin >> winLengh;
+    }
 
     Board board(boardSize, winLengh);
 
