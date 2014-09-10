@@ -4,6 +4,12 @@
 
 //We need to zero all the array as gcc wont do it for us easyiest to do it in the constructor
 Board::Board(){
+    M = 5;
+    K = 3;
+    boardState = new int*[M];
+    for(int i = 0; i < M; i++){
+	boardState[i] = new int[M];
+    }
     for(int col = 0; col<M; col++){
 	for(int row = 0; row<M; row++){
 	    boardState[col][row] = 0;
@@ -11,6 +17,19 @@ Board::Board(){
     }
 }
 
+Board::Board(int boardSize, int winningLength){
+    M = boardSize;
+    K = winningLength;
+    boardState = new int*[M];
+    for(int i = 0; i < M; i++){
+	boardState[i] = new int[M];
+    }
+    for(int col = 0; col<M; col++){
+	for(int row = 0; row<M; row++){
+	    boardState[col][row] = 0;
+	}
+    }
+}
 
 void Board::printBoard(){
     //Add numbers to top of board
@@ -63,8 +82,8 @@ int Board::playerInput(int col, int row, int player){
 
     //We need to know if position is already taken if it is throw an error
     if(boardState[col][row] != 0){
-	    return -2;
-	}
+	return -2;
+    }
     //as player 1 is one and player 2 is -1 we can just check as player 1 auto evaluates to true and player 2 false
     //the player is entering positions from one not zero account for the offset    
     if(player == 1){
@@ -118,23 +137,35 @@ int Board::checkIfGameWon(int playerNum){
 	for(int col = 0; col < M; col++){
 	    //Only check this once as it applies to both directions
 	    if(boardState[col][row] == playerNum){
-		if(boardState[col-1][row+1] == playerNum){
-		    if(boardState[col-2][row+2] == playerNum){
-			return 1;
-		    }
-		}
-		numInRow++;
-		for(int i = 1, j = 1; i < K; i++, j++){
-		    if(boardState[col+i][row+j] == playerNum){
-			numInRow++;
-		    } else {
-			numInRow = 0;
+		for(int i = 1, j = 1; j < K; i++, j++){
+		    if(col-i > -1){
+			if(boardState[col-i][row+j] == playerNum){
+			    numInRow++;
+
+			} else {
+			    numInRow = 0;
+			}
 		    }
 		    if(numInRow == K){
 			return 1;
 		    }
 		}
-		for(int i = -1, j = 1; j < K; i--, j++){
+			    
+
+		numInRow++;
+		for(int i = 1, j = 1; i < K; i++, j++){
+		    if((col+i) < M && (row+j) < M){
+			if(boardState[col+i][row+j] == playerNum){
+			    numInRow++;
+			} else {
+			    numInRow = 0;
+			}
+		    }
+		    if(numInRow == K){
+			return 1;
+		    }
+		}
+		for(int i = -1, j = 1; (i > -1) && (j < K); i--, j++){
 		    if(boardState[col-i][row+j] == playerNum){
 			numInRow++;
 		    } else {

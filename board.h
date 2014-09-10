@@ -5,8 +5,8 @@
 
 class Board {
 private:
-    static const int M = 5;
-    static const int K = 3;
+    int M;
+    int K;
 
 /* 
    Options for board state
@@ -15,13 +15,14 @@ private:
   -1 = player 2 (O)
    defaults to 0
 */
-    int boardState[M][M];
+    int **boardState;
 
 public:
     void printBoard();
     int playerInput(int, int, int);
     int checkIfGameWon(int);
     Board();
+    Board(int, int);
 
 };
 

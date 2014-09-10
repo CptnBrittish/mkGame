@@ -8,7 +8,7 @@
 using namespace std;
 
 int main(){
-    Board board;
+    Board board(5, 3);
 
     humanPlayer player[2] = {humanPlayer(1) , humanPlayer(2)};
 
