@@ -8,7 +8,13 @@
 using namespace std;
 
 int main(){
-    Board board(5, 3);
+    int boardSize, winLengh;
+    cout << "Please enter M: ";
+    cin >> boardSize;
+    cout << "Please enter K: ";
+    cin >> winLengh;
+
+    Board board(boardSize, winLengh);
 
     humanPlayer player[2] = {humanPlayer(1) , humanPlayer(2)};
 
