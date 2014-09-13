@@ -31,6 +31,15 @@ Board::Board(int boardSize, int winningLength){
     }
 }
 
+Board::~Board(){
+    for(int i = 0; i < M; i++){
+	delete[] boardState[i];
+    }
+    delete[] boardState;
+    delete &M;
+    delete &K;
+}
+
 void Board::printBoard(){
     //Add numbers to top of board
     std::cout << "  ";

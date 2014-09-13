@@ -11,6 +11,7 @@ private:
 public:
     void input(Board&);
     humanPlayer(int);
+    ~humanPlayer();
 };
 
 #endif

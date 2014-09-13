@@ -4,6 +4,9 @@
 humanPlayer::humanPlayer(int playerNum){
     player = playerNum;
 }
+humanPlayer::~humanPlayer(){
+    delete &player;
+}
 
 void humanPlayer::input(Board &playerBoard){
     int col = 0; //posx

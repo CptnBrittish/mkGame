@@ -23,7 +23,7 @@ public:
     int checkIfGameWon(int);
     Board();
     Board(int, int);
-
+    ~Board();
 };
 
 #endif
