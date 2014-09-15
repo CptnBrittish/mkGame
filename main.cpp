@@ -10,6 +10,30 @@
 using namespace std;
 
 int main(){
+
+    int opponantChoice = 1;
+    Player *player[2];
+    while(opponantChoice != 56){
+	cout << "Please enter game type:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer";
+	cin >> opponantChoice;
+	cout << endl;
+	if(opponantChoice == 1){
+	    player[0]  = new humanPlayer(1);
+	    player[1] = new humanPlayer(2); 
+	    opponantChoice = 56;
+	} else if(opponantChoice == 2){
+	    player[0] = new humanPlayer(1);
+	    player[1] = new computerPlayer(2); 
+	    opponantChoice = 56;
+	} else if(opponantChoice == 3){
+	    player[0] = new computerPlayer(1);
+	    player[1] = new computerPlayer(2); 
+	    opponantChoice =56;
+	} else {
+	    cout << "Input out of range please enter new value" << endl;
+	}
+    }
+
     int boardSize, winLengh;
     cout << "Please enter M: ";
     cin >> boardSize;
@@ -24,27 +48,7 @@ int main(){
 
     Board board(boardSize, winLengh);
 
-    int i = 1;
-    Player *player[2];
-    while(i != 56){
-	cout << "Please enter game type:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer";
-	cin >> i;
-	if(i == 1){
-	    player[0]  = new humanPlayer(1);
-	    player[1] = new humanPlayer(2); 
-	    i = 56;
-	} else if(i == 2){
-	    player[0] = new humanPlayer(1);
-	    player[1] = new computerPlayer(2); 
-	    i = 56;
-	} else if(i == 3){
-	    player[0] = new computerPlayer(1);
-	    player[1] = new computerPlayer(2); 
-	    i =56;
-	} else {
-	    cout << "Input out of range please enter new value";
-	}
-    }
+
 
     //Let players veiw board before starting game
     board.printBoard();
