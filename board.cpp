@@ -40,6 +40,18 @@ Board::~Board(){
     delete &K;
 }
 
+int Board::getM(){
+    return M;
+}
+
+int Board::getK(){
+    return K;
+}
+
+int ** Board::getBoard(){
+    return boardState;
+}
+
 void Board::printBoard(){
     //Add numbers to top of board
     std::cout << "  ";

@@ -21,6 +21,9 @@ public:
     void printBoard();
     int playerInput(int, int, int);
     int checkIfGameWon(int);
+    int getK();
+    int getM();
+    int ** getBoard();
     Board();
     Board(int, int);
     ~Board();

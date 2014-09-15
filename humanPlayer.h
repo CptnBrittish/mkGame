@@ -3,13 +3,11 @@
 
 //doing this hurts
 #include "board.h"
+#include "player.h"
 
-class humanPlayer {
-private:
-    int player;
-
+class humanPlayer: public Player {
 public:
-    void input(Board&);
+    virtual void input(Board&);
     humanPlayer(int);
     ~humanPlayer();
 };

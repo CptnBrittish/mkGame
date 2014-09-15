@@ -1,5 +1,7 @@
 #include "main.h"
 #include "board.h"
+#include "player.h"
+#include "computerPlayer.h"
 #include "humanPlayer.h"
 
 #include <iostream>
@@ -22,14 +24,14 @@ int main(){
 
     Board board(boardSize, winLengh);
 
-    humanPlayer player[2] = {humanPlayer(1) , humanPlayer(2)};
+    Player *player[2] = {new humanPlayer(1), new computerPlayer(2)}; 
 
     //Let players veiw board before starting game
     board.printBoard();
  
     //we want an infinate loop and we check the result after every play
     while(1){
-	player[0].input(board);
+	player[0]->input(board);
 	board.printBoard();
 	checkResult = board.checkIfGameWon(1);
 	if(checkResult == 1){
@@ -39,7 +41,7 @@ int main(){
 	    cout << "The game was a tie" << endl;
 	    exit(0);
 	}
-	player[1].input(board);
+	player[1]->input(board);
 	board.printBoard();
 	checkResult = board.checkIfGameWon(2);
 	if(checkResult == 1){
