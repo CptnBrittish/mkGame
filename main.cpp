@@ -24,7 +24,27 @@ int main(){
 
     Board board(boardSize, winLengh);
 
-    Player *player[2] = {new humanPlayer(1), new computerPlayer(2)}; 
+    int i = 1;
+    Player *player[2];
+    while(i != 56){
+	cout << "Please enter game type:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer";
+	cin >> i;
+	if(i == 1){
+	    player[0]  = new humanPlayer(1);
+	    player[1] = new humanPlayer(2); 
+	    i = 56;
+	} else if(i == 2){
+	    player[0] = new humanPlayer(1);
+	    player[1] = new computerPlayer(2); 
+	    i = 56;
+	} else if(i == 3){
+	    player[0] = new computerPlayer(1);
+	    player[1] = new computerPlayer(2); 
+	    i =56;
+	} else {
+	    cout << "Input out of range please enter new value";
+	}
+    }
 
     //Let players veiw board before starting game
     board.printBoard();
