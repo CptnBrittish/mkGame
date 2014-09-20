@@ -16,7 +16,10 @@ lost or damaged.
 class computerPlayer: public Player {
 private:
     int findMove(int&, int&,int, int, int**);
-    int findPersonToBlock(int&, int&, int, int, int, int**);
+    int findPersonToBlock(int&, int&, int, int, int**);
+    int findVertical(int&, int&, int, int, int**);
+    int findHorizontal(int&, int&, int, int, int**);
+    int findDiagonal(int&, int&, int, int, int**);
     int opponant; //required for findMoves()
 public:
     virtual void input(Board&);
