@@ -14,7 +14,7 @@ int main(){
     int opponantChoice = 1;
     Player *player[2];
     while(opponantChoice != 56){
-	cout << "Please enter game type:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer";
+	cout << "Please enter game type:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer\n";
 	cin >> opponantChoice;
 	cout << endl;
 	if(opponantChoice == 1){
