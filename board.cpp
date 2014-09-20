@@ -122,86 +122,84 @@ int Board::playerInput(int col, int row, int player){
 //return 2 if a tie
 //return -1 if not won (somewhere is a method to the madness which is my seemingly arbitrary return values)
 int Board::checkIfGameWon(int playerNum){
-    int numInRow = 0;
+    int numInLine = 0;
 
     //Check if a person has won the game vertically
     for(int col = 0; col < M; col++){
 	for(int row = 0; row < M; row++){
 	    if(boardState[col][row] == playerNum){
-		numInRow++;
+		numInLine++;
 	    } else {
-		numInRow = 0;
+		numInLine = 0;
 	    }
-	    if(numInRow == K){
+	    if(numInLine == K){
 		return 1;
 	    }
 	}
     }
-    numInRow = 0;
+    numInLine = 0;
     	
     //check to see if a person has won the game horizontally
     for(int row = 0; row < M; row++){
 	for(int col = 0; col < M; col++){
 	    if(boardState[col][row] == playerNum){
-		numInRow++;
+		numInLine++;
 	    } else {
-		numInRow = 0;
+		numInLine = 0;
 	    }
-	    if(numInRow == K){
+	    if(numInLine == K){
 		return 1;
 	    }
 	}
     }
 
+    numInLine = 0;
+
     //check if game won diagonally
     //we need to do this in the fowards and back direction
     for(int row = 0; row < M; row++){
+
 	for(int col = 0; col < M; col++){
 	    //Only check this once as it applies to both directions
 	    if(boardState[col][row] == playerNum){
+		numInLine++;
 		for(int i = 1, j = 1; j < K; i++, j++){
+		    
+		   
 		    if(col-i > -1){
 			if(boardState[col-i][row+j] == playerNum){
-			    numInRow++;
+			    numInLine++;
 
 			} else {
-			    numInRow = 0;
+			    numInLine = 0;
 			}
 		    }
-		    if(numInRow == K){
+		    if(numInLine == K){
 			return 1;
 		    }
 		}
-			    
+	    }
+	    //Reset numInLine so we dont have a zig zag win
+	    numInLine = 1;
+	    for(int i = 1, j = 1; j < K; i++, j++){
+		if(col+i < M){
+		    if(boardState[col+i][row+j] == playerNum){
+			numInLine++;
+		    } else{
+			numInLine = 0;
+		    }
+		    if(numInLine == K){
 
-		numInRow++;
-		for(int i = 1, j = 1; i < K; i++, j++){
-		    if((col+i) < M && (row+j) < M){
-			if(boardState[col+i][row+j] == playerNum){
-			    numInRow++;
-			} else {
-			    numInRow = 0;
-			}
-		    }
-		    if(numInRow == K){
-			return 1;
-		    }
-		}
-		for(int i = -1, j = 1; (i > -1) && (j < K); i--, j++){
-		    if(boardState[col-i][row+j] == playerNum){
-			numInRow++;
-		    } else {
-			numInRow = 0;
-		    }
-		    if(numInRow == K){
 			return 1;
 		    }
 		}
 	    }
 	}
     }
+
+
     
-    numInRow = 0;
+    numInLine = 0;
 
     //Is the game a tie? 
     int numCounted = 0;
