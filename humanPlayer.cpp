@@ -14,7 +14,6 @@ void humanPlayer::input(Board &playerBoard){
     //if no errors it is a zero otherwise one
     int error = 1;
 
-    std::cout << "Player " << player << "'s turn" << std::endl;
     while(error == 1){
 	
 	std::cout << "Enter position X: ";

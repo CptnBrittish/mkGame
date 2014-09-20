@@ -55,6 +55,7 @@ int main(){
  
     //we want an infinate loop and we check the result after every play
     while(1){
+	cout << "Player 1's turn" << endl;
 	player[0]->input(board);
 	board.printBoard();
 	checkResult = board.checkIfGameWon(1);
@@ -65,6 +66,7 @@ int main(){
 	    cout << "The game was a tie" << endl;
 	    exit(0);
 	}
+	cout << "Player 2's turn" << endl;
 	player[1]->input(board);
 	board.printBoard();
 	checkResult = board.checkIfGameWon(2);
