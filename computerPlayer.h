@@ -19,7 +19,8 @@ private:
     int findPersonToBlock(int&, int&, int, int, int**);
     int findVertical(int&, int&, int, int, int**);
     int findHorizontal(int&, int&, int, int, int**);
-    int findDiagonal(int&, int&, int, int, int**);
+    int findDiagonalLeft(int&, int&, int, int, int**);
+    int findDiagonalRight(int&, int&, int, int, int**);
     int opponant; //required for findMoves()
 public:
     virtual void input(Board&);
