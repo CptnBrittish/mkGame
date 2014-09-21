@@ -1,13 +1,3 @@
-/*********** Declaration*******
-I hereby certify that no part of this assignment has been copied from
-any other student’s work or from any other source. No part of the code
-has been written/produced for me by another person or copied from any
-other source.
-I hold a copy of this assignment that I can produce if the original is
-lost or damaged.
-**************************/
-
-
 #include "computerPlayer.h"
 #include "board.h"
 
@@ -16,18 +6,30 @@ lost or damaged.
 #include <stdlib.h>
 #include <time.h>
 
-computerPlayer::computerPlayer(int playerNum){
+computerPlayer::computerPlayer(int playerNum, Board *tempBoard){
     player = playerNum;
     if(player == 1){
 	opponant = 2;
     } else {
 	opponant = 1;
     }
+    playerBoard = tempBoard;
+    board = new int*[playerBoard->getM()];
+    for(int i = 0; i < playerBoard->getM(); i++){
+	board[i] = new int[playerBoard->getM()];
+    }
 }
 
+void computerPlayer::syncBoard(){
+    for(int i = 0; i < playerBoard->getM(); i++){
+	for(int j = 0; j < playerBoard->getM(); j++){
+	    board[i][j] = playerBoard->getBoard()[i][j];
+	}
+    }
+}
 
-int computerPlayer::findMove(int &col, int &row, int M, int K, int **board){
-    if(findPersonToBlock(col, row, M, ceil(K/2), board) == 1){
+int computerPlayer::findMove(int &col, int &row, int M, int K){
+    if(findPersonToBlock(col, row, M, ceil(K/2)) == 1){
 	return 1;
     } else {
 	for(int i = 0; i < M; i++){
@@ -47,7 +49,7 @@ int computerPlayer::findMove(int &col, int &row, int M, int K, int **board){
 
 }
 
-int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K, int **boardState){
+int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
     int horx = 0, hory = 0;
     bool hor = false;
     int vertx = 0, verty = 0;
@@ -57,10 +59,10 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K, int **boardS
     int diagrightx = 0, diagrighty = 0;
     bool diagright = false;
 
-    if(findVertical(vertx, verty, M, K, boardState) == 1){
+    if(findVertical(vertx, verty, M, K) == 1){
 	vert = true;
 	if(verty+1 < M){
-	    if(boardState[vertx][verty+1] == opponant){
+	    if(board[vertx][verty+1] == opponant){
 		x = horx;
 		y = hory;
 	
@@ -68,30 +70,30 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K, int **boardS
 	    }
 	}
     }
-    if(findHorizontal(horx, hory, M, K, boardState) == 1){
+    if(findHorizontal(horx, hory, M, K) == 1){
 	hor = true;
 	if(horx+1 < M){
-	    if(boardState[horx+1][hory] == opponant){
+	    if(board[horx+1][hory] == opponant){
 		x = horx;
 		y = hory;
 		return 1;
 	    }
 	}
     }
-    if(findDiagonalLeft(diagleftx, diaglefty, M, K, boardState)  == 1){
+    if(findDiagonalLeft(diagleftx, diaglefty, M, K)  == 1){
 	diagleft = true;
 	if(diagleftx-1 > -1){
-	    if(boardState[diagleftx-1][diaglefty+1] == opponant){
+	    if(board[diagleftx-1][diaglefty+1] == opponant){
 		x = diagleftx;
 		y = diaglefty;
 		return 1;
 	    }
 	}
     }
-    if(findDiagonalRight(diagrightx, diagrighty, M, K, boardState) == 1){
+    if(findDiagonalRight(diagrightx, diagrighty, M, K) == 1){
 	diagright = true;
 	if(diagrightx+1 < M){
-	    if(boardState[diagrightx+1][diagrighty+1] == opponant){
+	    if(board[diagrightx+1][diagrighty+1] == opponant){
 		x = diagrightx;
 		y = diagrighty;
 		return 1;
@@ -251,19 +253,19 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K, int **boardS
     return 0;
 }
 
-int computerPlayer::findVertical(int &x, int &y, int M, int K, int **boardState){
+int computerPlayer::findVertical(int &x, int &y, int M, int K){
     int numInLine = 0;
     //Check if a person has won the game vertically
     for(int col = 0; col < M; col++){
 	for(int row = 0; row < M; row++){
-	    if(boardState[col][row] == opponant){
+	    if(board[col][row] == opponant){
 		numInLine++;
 	    } else {
 		numInLine = 0;
 	    }
 	    if(numInLine == K){
 		if(row+1 < M){
-		    if(boardState[col][row+1] == 0){
+		    if(board[col][row+1] == 0){
 			x = col;
 			y = row+1;
 			return 1;
@@ -276,21 +278,21 @@ int computerPlayer::findVertical(int &x, int &y, int M, int K, int **boardState)
 
 }
 
-int computerPlayer::findHorizontal(int &x, int &y, int M, int K, int **boardState){
+int computerPlayer::findHorizontal(int &x, int &y, int M, int K){
     int numInLine = 0;
     //check to see if a person has won the game horizontally
     for(int row = 0; row < M; row++){
 	y = row;
 	for(int col = 0; col < M; col++){
 	    x = col;
-	    if(boardState[col][row] == opponant){
+	    if(board[col][row] == opponant){
 		numInLine++;
 	    } else {
 		numInLine = 0;
 	    }
 	    if(numInLine == K){
 		if(col+1 < M){
-		    if(boardState[col+1][row] == 0){
+		    if(board[col+1][row] == 0){
 			x = col + 1;
 			y = row;
 			return 1;
@@ -302,7 +304,7 @@ int computerPlayer::findHorizontal(int &x, int &y, int M, int K, int **boardStat
     return 0;
 }
 
-int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K, int **boardState){
+int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K){
     int numInLine = 0;
     //check if game won diagonally
     //we need to do this in the fowards and back direction
@@ -311,14 +313,14 @@ int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K, int **boardSt
 	for(int col = 0; col < M; col++){
 	    for(int i = 0, j = 0; j < K; i++, j++){
 		if(col-i > -1){
-		    if(boardState[col-i][row+j] == opponant){
+		    if(board[col-i][row+j] == opponant){
 			numInLine++;
 		    } else{
 			numInLine = 0;
 		    }
 		    if(numInLine == K){
 			if(col-i-1 > -1){
-			    if(boardState[col-i-1][row+j+1] == 0){
+			    if(board[col-i-1][row+j+1] == 0){
 				x = col - i - 1;
 				y = row + j + 1;
 				return 1;
@@ -333,7 +335,7 @@ int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K, int **boardSt
     return 0;
 }
 
-int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K, int **boardState){
+int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K){
     int numInLine = 0;
     //check if game won diagonally
     //we need to do this in the fowards and back direction
@@ -345,7 +347,7 @@ int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K, int **boardS
 		    
 		   
 		if(col+i < M){
-		    if(boardState[col+i][row+j] == opponant){
+		    if(board[col+i][row+j] == opponant){
 			numInLine++;
 
 		    } else {
@@ -354,7 +356,7 @@ int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K, int **boardS
 		}
 		if(numInLine == K){
 		    if(col+i+1 < M){
-			if(boardState[col+i+1][row+j+1] == 0){
+			if(board[col+i+1][row+j+1] == 0){
 			    x = col + i + 1;
 			    y = row + j + 1;
 			    return 1;
@@ -368,12 +370,10 @@ int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K, int **boardS
     return 0;
 }
 
-void computerPlayer::input(Board &playerBoard){
+void computerPlayer::input(){
     int col;
     int row;
-    findMove(col, row, playerBoard.getM(), playerBoard.getK(), playerBoard.getBoard());
-    playerBoard.playerInput(col, row, player);
+    syncBoard();
+    findMove(col, row, playerBoard->getM(), playerBoard->getK());
+    playerBoard->playerInput(col, row, player);
 }
- 
- 
-

@@ -7,8 +7,9 @@
 
 class humanPlayer: public Player {
 public:
-    virtual void input(Board&);
-    humanPlayer(int);
+    Board *playerBoard;
+    virtual void input();
+    humanPlayer(int, Board*);
     ~humanPlayer();
 };
 

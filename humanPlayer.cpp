@@ -1,14 +1,15 @@
 #include "humanPlayer.h"
 #include "board.h"
 
-humanPlayer::humanPlayer(int playerNum){
+humanPlayer::humanPlayer(int playerNum, Board *tempBoard){
     player = playerNum;
+    playerBoard = tempBoard;
 }
 humanPlayer::~humanPlayer(){
     delete &player;
 }
 
-void humanPlayer::input(Board &playerBoard){
+void humanPlayer::input(){
     int col = 0; //posx
     int row = 0; //posy
     //if no errors it is a zero otherwise one
@@ -24,7 +25,7 @@ void humanPlayer::input(Board &playerBoard){
 	col--;
 	row--;
 		
-	int inputReturn = playerBoard.playerInput(col, row, player);
+	int inputReturn = playerBoard->playerInput(col, row, player);
 	if(inputReturn == -1){
 	    std::cout << "Input was out of range" << std::endl << "Please enter a diffrent position" << std::endl;
 	    error = 1;    

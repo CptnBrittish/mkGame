@@ -6,7 +6,7 @@
 class Player {
 public:
     int player;
-    virtual void input(Board&) = 0;
+    virtual void input() = 0;
     Player();
 };
 
