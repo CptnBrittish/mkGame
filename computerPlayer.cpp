@@ -263,11 +263,11 @@ int computerPlayer::findVertical(int &x, int &y, int M, int K, int **boardState)
 	    }
 	    if(numInLine == K){
 		if(row+1 < M){
-		if(boardState[col][row+1] == 0){
-		    x = col;
-		    y = row+1;
-		    return 1;
-		}
+		    if(boardState[col][row+1] == 0){
+			x = col;
+			y = row+1;
+			return 1;
+		    }
 		}
 	    }
 	}
@@ -290,11 +290,11 @@ int computerPlayer::findHorizontal(int &x, int &y, int M, int K, int **boardStat
 	    }
 	    if(numInLine == K){
 		if(col+1 < M){
-		if(boardState[col+1][row] == 0){
-		    x = col + 1;
-		    y = row;
-		    return 1;
-		}
+		    if(boardState[col+1][row] == 0){
+			x = col + 1;
+			y = row;
+			return 1;
+		    }
 		}
 	    }
 	}
