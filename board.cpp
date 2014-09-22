@@ -155,33 +155,34 @@ int Board::checkIfGameWon(int playerNum){
 
     numInLine = 0;
 
-    //check if game won diagonally
-    //we need to do this in the fowards and back direction
+    //check if game won diagonally left
     for(int row = 0; row < M; row++){
-
 	for(int col = 0; col < M; col++){
-	    //Only check this once as it applies to both directions
-	    if(boardState[col][row] == playerNum){
-		numInLine++;
-		for(int i = 1, j = 1; j < K; i++, j++){
-		    
-		   
-		    if(col-i > -1){
-			if(boardState[col-i][row+j] == playerNum){
-			    numInLine++;
-
-			} else {
-			    numInLine = 0;
-			}
+	    for(int i = 0, j = 0; j < K; i++, j++){
+		if(col-i > -1){
+		    if(boardState[col-i][row+j] == playerNum){
+			numInLine++;
+			
+		    } else {
+			numInLine = 0;
 		    }
 		    if(numInLine == K){
 			return 1;
 		    }
+		} else {
+		    numInLine = 0;
 		}
 	    }
-	    //Reset numInLine so we dont have a zig zag win
-	    numInLine = 1;
-	    for(int i = 1, j = 1; j < K; i++, j++){
+	}
+    }
+
+
+    numInLine = 0;
+
+    //check if game won diagonaly right
+    for(int row = 0; row < M; row++){
+	for(int col = 0; col < M; col++){
+	    for(int i = 0, j = 0; j < K; i++, j++){
 		if(col+i < M){
 		    if(boardState[col+i][row+j] == playerNum){
 			numInLine++;
@@ -189,15 +190,14 @@ int Board::checkIfGameWon(int playerNum){
 			numInLine = 0;
 		    }
 		    if(numInLine == K){
-
 			return 1;
 		    }
+		} else {
+		    numInLine = 0;
 		}
 	    }
 	}
     }
-
-
     
     numInLine = 0;
 
