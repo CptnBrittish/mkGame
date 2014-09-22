@@ -106,7 +106,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
     srand(time(NULL));
 
     if(vert && hor && diagleft && diagright){
-	randNum = rand() % 3;
+	randNum = rand() % 4;
 	if(randNum == 0){
 	    x = vertx;
 	    y = verty;
@@ -123,7 +123,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(vert && hor && diagleft){
-	randNum = rand() % 2;
+	randNum = rand() % 3;
 	if(randNum == 0){
 	    x = vertx;
 	    y = verty;
@@ -137,7 +137,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(vert && hor && diagright){
-	randNum = rand() % 2;
+	randNum = rand() % 3;
 	if(randNum == 0){
 	    x = vertx;
 	    y = verty;
@@ -151,7 +151,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(hor && diagleft && diagright){
-	randNum = rand() % 2;
+	randNum = rand() % 3;
 	if(randNum == 0){
 	    x = horx;
 	    y = hory;
@@ -165,7 +165,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(vert && hor){
-	randNum = rand() % 1;
+	randNum = rand() % 2;
 	if(randNum == 0){
 	    x = vertx;
 	    y = verty;
@@ -176,7 +176,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(vert && diagleft){
-	randNum = rand() % 1;
+	randNum = rand() % 2;
 	if(randNum == 0){
 	    x = vertx;
 	    y = verty;
@@ -187,7 +187,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(vert && diagright){
-	randNum = rand() % 1;
+	randNum = rand() % 2;
 	if(randNum == 0){
 	    x = vertx;
 	    y = verty;
@@ -198,7 +198,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(hor && diagleft){
-	randNum = rand() % 1;
+	randNum = rand() % 2;
 	if(randNum == 0){
 	    x = horx;
 	    y = hory;
@@ -209,7 +209,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(hor && diagright){
-	randNum = rand() % 1;
+	randNum = rand() % 2;
 	if(randNum == 0){
 	    x = horx;
 	    y = hory;
@@ -220,7 +220,7 @@ int computerPlayer::findPersonToBlock(int &x, int &y, int M, int K){
 	return 1;
     }
     if(diagleft && diagright){
-	randNum = rand() % 1;
+	randNum = rand() % 2;
 	if(randNum == 0){
 	    x = diagleftx;
 	    y = diaglefty;
