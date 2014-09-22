@@ -307,9 +307,7 @@ int computerPlayer::findHorizontal(int &x, int &y, int M, int K){
 int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K){
     int numInLine = 0;
     //check if game won diagonally
-    //we need to do this in the fowards and back direction
     for(int row = 0; row < M; row++){
-
 	for(int col = 0; col < M; col++){
 	    for(int i = 0, j = 0; j < K; i++, j++){
 		if(col-i > -1){
@@ -327,6 +325,8 @@ int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K){
 			    }
 			}
 		    }
+		} else { 
+		    numInLine = 0;
 		}
 	    }
 	}
@@ -338,14 +338,9 @@ int computerPlayer::findDiagonalLeft(int &x, int &y, int M, int K){
 int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K){
     int numInLine = 0;
     //check if game won diagonally
-    //we need to do this in the fowards and back direction
     for(int row = 0; row < M; row++){
-
 	for(int col = 0; col < M; col++){
-
 	    for(int i = 0, j = 0; j < K; i++, j++){
-		    
-		   
 		if(col+i < M){
 		    if(board[col+i][row+j] == opponant){
 			numInLine++;
@@ -353,15 +348,17 @@ int computerPlayer::findDiagonalRight(int &x, int &y, int M, int K){
 		    } else {
 			numInLine = 0;
 		    }
-		}
-		if(numInLine == K){
-		    if(col+i+1 < M){
-			if(board[col+i+1][row+j+1] == 0){
-			    x = col + i + 1;
-			    y = row + j + 1;
-			    return 1;
+		    if(numInLine == K){
+			if(col+i+1 < M){
+			    if(board[col+i+1][row+j+1] == 0){
+				x = col + i + 1;
+				y = row + j + 1;
+				return 1;
+			    }
 			}
 		    }
+		} else {
+		    numInLine = 0;
 		}
 	    }
 
