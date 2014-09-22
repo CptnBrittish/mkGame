@@ -22,26 +22,29 @@ int main(){
 	cin >> winLengh;
     }
 
+    cout << endl;
+
     Board board(boardSize, winLengh);
 
     int opponantChoice = 1;
+    bool correctChoiceRange = false;
     Player *player[2];
-    while(opponantChoice != 56){
-	cout << "Please enter game type:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer\n";
+    while(correctChoiceRange == false){
+	cout << "Game types avaliable:\n 1) Human vs Human\n 2) Human vs Computer\n 3) Computer vs Computer\nPlease choose a game type: ";
 	cin >> opponantChoice;
 	cout << endl;
 	if(opponantChoice == 1){
 	    player[0]  = new humanPlayer(1, &board);
 	    player[1] = new humanPlayer(2, &board); 
-	    opponantChoice = 56;
+	    correctChoiceRange = true;
 	} else if(opponantChoice == 2){
 	    player[0] = new humanPlayer(1, &board);
 	    player[1] = new computerPlayer(2, &board); 
-	    opponantChoice = 56;
+	    correctChoiceRange = true;
 	} else if(opponantChoice == 3){
 	    player[0] = new computerPlayer(1, &board);
 	    player[1] = new computerPlayer(2, &board); 
-	    opponantChoice =56;
+	    correctChoiceRange = true;
 	} else {
 	    cout << "Input out of range please enter new value" << endl;
 	}
