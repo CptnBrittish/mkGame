@@ -29,9 +29,24 @@ void computerPlayer::syncBoard(){
 }
 
 int computerPlayer::findMove(int &col, int &row, int M, int K){
+    //First see if we can win the game
+    if(findHorizontal(col, row, M, K-1) == 1){
+	return 1;
+    }
+    if(findVertical(col, row, M, K-1) == 1){
+	return 1;
+    }
+    if(findDiagonalLeft(col, row, M, K-1) == 1){
+	return 1;
+    }
+    if(findDiagonalRight(col, row, M, K-1) == 1){
+	return 1;
+    }
+    //try to block other player for winning
     if(findPersonToBlock(col, row, M, ceil(K/2)) == 1){
 	return 1;
     } else {
+	//if there are no positions needed to be blocked find a position near the center
 	int lineLengh = 1;
 	int direction = -1;
 
