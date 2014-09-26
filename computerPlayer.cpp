@@ -29,6 +29,12 @@ void computerPlayer::syncBoard(){
 }
 
 int computerPlayer::findMove(int &col, int &row, int M, int K){
+    //If the middle position isnt taken take it as this is the best position to hold
+    if(board[(int)ceil(M/2)-1][(int)ceil(M/2)-1] == 0){
+	col = ceil(M/2)-1;
+	row = ceil(M/2)-1;
+	return 1;
+    }
     //First see if we can win the game
     if(findHorizontal(col, row, M, K-1) == 1){
 	return 1;
