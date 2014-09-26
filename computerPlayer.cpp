@@ -32,17 +32,34 @@ int computerPlayer::findMove(int &col, int &row, int M, int K){
     if(findPersonToBlock(col, row, M, ceil(K/2)) == 1){
 	return 1;
     } else {
-	for(int i = 0; i < M; i++){
-	    for(int j = 0; j < M; j++){
-		if(board[i][j] == 0){
-		    col = i;
-		    row = j;
-		    std::cout <<"find next value: " << col << " " << row << std::endl;
-		    //return from function now otherwise we go to the end of the board
+	int lineLengh = 1;
+	int direction = -1;
+
+	col = ceil(M/2);
+	row = ceil(M/2);
+
+	while(!( (col == M) && (row == M) )){
+
+	    for(int i = lineLengh; i > 0; i--){
+		row = row + (1 * direction);
+		if(board[col][row] == 0){
 		    return 1;
 		}
 	    }
+	    for(int i = lineLengh; i > 0; i--){
+		col = col + (1 * direction);
+		if(board[col][row] == 0){
+		    return 1;
+		}
+	    }
+	    if(direction == 1){
+		direction = -1;
+	    } else {
+		direction = 1;
+	    }
+	    lineLengh++;
 	}
+
     }
 
     return 1;
