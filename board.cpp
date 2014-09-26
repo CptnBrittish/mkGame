@@ -136,6 +136,7 @@ int Board::checkIfGameWon(int playerNum){
 		return 1;
 	    }
 	}
+	numInLine = 0;
     }
     numInLine = 0;
     	
@@ -151,6 +152,7 @@ int Board::checkIfGameWon(int playerNum){
 		return 1;
 	    }
 	}
+	numInLine = 0;
     }
 
     numInLine = 0;
@@ -173,7 +175,9 @@ int Board::checkIfGameWon(int playerNum){
 		    numInLine = 0;
 		}
 	    }
+	    numInLine = 0;
 	}
+	numInLine = 0;
     }
 
 
@@ -196,7 +200,9 @@ int Board::checkIfGameWon(int playerNum){
 		    numInLine = 0;
 		}
 	    }
+	    numInLine = 0;
 	}
+	numInLine = 0;
     }
     
     numInLine = 0;
